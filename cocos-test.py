@@ -7,7 +7,6 @@
 
 # Jason Wright (jpwright0@gmail.com)
 
-
 # Imports
 import pyglet
 from pyglet.window import key
@@ -25,8 +24,7 @@ class Me(actions.Move):
   def step(self, dt):
     super(Me, self).step(dt) # Run step function on the parent class.
     # Determine velocity based on keyboard inputs.
-    velocity_x = 100 * (keyboard[key.RIGHT] -
-    keyboard[key.LEFT])
+    velocity_x = 100 * (keyboard[key.RIGHT] - keyboard[key.LEFT])
     velocity_y = 100 * (keyboard[key.UP] - keyboard[key.DOWN])
 
     # Set the object's velocity.
@@ -38,7 +36,7 @@ def main():
   # Initialize the window
   director.init(width=500, height=300, autoscale=True, resizable=True)
 
-# Create a layer and add a sprite to it.
+  # Create a layer and add a sprite to it.
   player_layer = layer.Layer()
   me = sprite.Sprite('sprites/molecule.png')
   player_layer.add(me)
