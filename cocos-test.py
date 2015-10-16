@@ -15,8 +15,13 @@ import cocos
 from cocos import actions, layer, sprite, scene
 from cocos.director import director
 
-# Player class
+# Screen size
+size = (800,600)
 
+# Arbitrary variable we include later in out text label, attention to the scope!
+deltaTime = 42
+
+# Player class called Me() <--- Needs better name
 class Me(actions.Move):
 
   # step() is called every frame.
@@ -29,32 +34,38 @@ class Me(actions.Move):
 
     # Set the object's velocity.
     self.target.velocity = (velocity_x, velocity_y)
-    # Main class
 
+# Main class
 def main():
   global keyboard # Declare this as global so it can be accessed within class methods.
   # Initialize the window
-  director.init(width=500, height=300, autoscale=True, resizable=True)
+  director.init(width=size[0], height=size[1], autoscale=True, resizable=True)
 
   # Create a layer and add a sprite to it.
   player_layer = layer.Layer()
-  me = sprite.Sprite('sprites/molecule.png')
-  player_layer.add(me)
+  molecule = sprite.Sprite('sprites/molecule.png')
+  molecule.scale = 2
+  player_layer.add(molecule, z=1)
+  scale = actions.ScaleBy(3, duration=2)
 
-  # Add a Label, because we can
-  label = cocos.text.Label('Hello, world', font_name='Times New Roman', font_size=32, anchor_x='center', anchor_y='center')
-  label.position = 250, 150
+  # Add a Label, because we can.
+  label = cocos.text.Label('Hello, world@' + str(deltaTime), font_name='Times New Roman', font_size=32, anchor_x='left', anchor_y='center')
+  label.position = 0, size[1]/2
   label.velocity = 0, 0
   player_layer.add(label)
 
   # Set initial position and velocity.
-  me.position = (100, 100)
-  me.velocity = (0, 0)
+  molecule.position = (size[0]/2, size[1]/2)
+  molecule.velocity = (0, 0)
 
-  # Set the sprite's movement class.
-  #me.do(Me())
+  # Set the sprite's movement class and run some actions.
+  molecule.do(actions.Repeat(scale + actions.Reverse(scale)))
+  
   label.do(Me())
 
+  # Rotate the entire player_layer (includes ALL nodes, will rotate ONCE)
+  player_layer.do(actions.RotateBy(360, duration=10))
+  
   # Create a scene and set its initial layer.
   main_scene = scene.Scene(player_layer)
 
