@@ -41,12 +41,19 @@ def main():
   me = sprite.Sprite('sprites/molecule.png')
   player_layer.add(me)
 
+  # Add a Label, because we can
+  label = cocos.text.Label('Hello, world', font_name='Times New Roman', font_size=32, anchor_x='center', anchor_y='center')
+  label.position = 250, 150
+  label.velocity = 0, 0
+  player_layer.add(label)
+
   # Set initial position and velocity.
   me.position = (100, 100)
   me.velocity = (0, 0)
 
   # Set the sprite's movement class.
-  me.do(Me())
+  #me.do(Me())
+  label.do(Me())
 
   # Create a scene and set its initial layer.
   main_scene = scene.Scene(player_layer)
