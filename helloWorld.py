@@ -17,10 +17,10 @@ class HelloWorld(cocos.layer.Layer):
 		label = cocos.text.Label('Hello, world', font_name='Times New Roman', font_size=32, anchor_x='center', anchor_y='center')
 		# set the position of our text to x:320 y:240
 		label.position = (320, 240)
-		# add our label as a child. It is a CocosNode object, which know how to render themselves. 
+		# add our label as a child. It is a CocosNode object, which know how to render themselves.
 		self.add(label)
 
-# our main funciton
+# our main function
 def main():
 	# We initialize the director, that takes care of our main window
 	cocos.director.director.init()

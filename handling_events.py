@@ -6,7 +6,6 @@ from __future__ import division, print_function, unicode_literals
 import sys
 import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
-#
 
 import cocos
 from cocos.director import director
@@ -21,7 +20,6 @@ class KeyDisplay(cocos.layer.Layer):
     is_event_handler = True     #: enable pyglet's events
 
     def __init__(self):
-
         super(KeyDisplay, self).__init__()
 
         self.text = cocos.text.Label("", x=100, y=280)
@@ -30,6 +28,7 @@ class KeyDisplay(cocos.layer.Layer):
         self.keys_pressed = set()
         self.update_text()
         self.add(self.text)
+        print("Initialiazed KeyDisplay()")
 
     # This method of the class updates the text
     def update_text(self):
@@ -37,6 +36,7 @@ class KeyDisplay(cocos.layer.Layer):
         text = 'Keys: ' + ','.join(key_names)
         # Update self.text
         self.text.element.text = text
+        print("Called update_text in KeyDisplay()")
 
     def on_key_press(self, key, modifiers):
         """This function is called when a key is pressed.
@@ -50,6 +50,7 @@ class KeyDisplay(cocos.layer.Layer):
         """
         self.keys_pressed.add(key)
         self.update_text()
+        print("Called on_key_press in KeyDisplay()")
 
     def on_key_release(self, key, modifiers):
         """This function is called when a key is released.
@@ -70,6 +71,7 @@ class KeyDisplay(cocos.layer.Layer):
         """
         self.keys_pressed.discard(key)
         self.update_text()
+        print("Called on_key_release in KeyDisplay()")
 
 
 class MouseDisplay(cocos.layer.Layer):
@@ -86,6 +88,7 @@ class MouseDisplay(cocos.layer.Layer):
         self.posy = 240
         self.text = cocos.text.Label('No mouse events yet', font_size=18, x=self.posx, y=self.posy)
         self.add(self.text)
+        print("Initialiazed MouseDisplay()")
 
     def update_text(self, x, y):
         text = 'Mouse @ %d,%d' % (x, y)

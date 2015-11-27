@@ -35,7 +35,7 @@ class Me(actions.Move):
     # Set the object's velocity.
     self.target.velocity = (velocity_x, velocity_y)
 
-# Main class
+# Main method of class
 def main():
   global keyboard # Declare this as global so it can be accessed within class methods.
   # Initialize the window
@@ -60,12 +60,12 @@ def main():
 
   # Set the sprite's movement class and run some actions.
   molecule.do(actions.Repeat(scale + actions.Reverse(scale)))
-  
+
   label.do(Me())
 
   # Rotate the entire player_layer (includes ALL nodes, will rotate ONCE)
   player_layer.do(actions.RotateBy(360, duration=10))
-  
+
   # Create a scene and set its initial layer.
   main_scene = scene.Scene(player_layer)
 
